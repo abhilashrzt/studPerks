@@ -13,7 +13,7 @@ const DropDown = ({value, data, onChangeData, name, id, key, valueKey, label}) =
                 onChange={(e)=>onChangeData({key: valueKey, value: e.target.value})}
             >
                 {
-                    data.map((item)=><option value={item}>{item}</option>)
+                    data.map((item, index)=><option key={index} value={item}>{item}</option>)
                 }
             </select> 
         </>

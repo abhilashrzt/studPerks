@@ -24,7 +24,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                 className={styles.inputElement} 
                 type='text' 
                 disabled
-                value={data.fileName.replace(/[^a-zA-Z ]/g, "")}
+                value={data.fileName}
                 placeholder='File name'
                 />
                 </div>
@@ -32,7 +32,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                     <DropDown
                         value={data?.degree || []}
                         onChangeData={onChangeData}
-                        name={"name"}
+                        name={"Degree"}
                         id={"id"} 
                         valueKey={"degree"}
                         data={["BCA", "BSc", "BA", "BCom", "BBA"]}
@@ -45,7 +45,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                         disabled={!data.degree} 
                         title={'Upload File'} 
                         type="file"
-                        accept=".pdf, .doc, .docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
+                        accept=".pdf, .doc, .txt, .docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" 
                         onChange={onSelectFile} 
                     />
             </div>

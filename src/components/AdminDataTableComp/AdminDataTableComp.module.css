@@ -94,3 +94,11 @@ th{
 .searchText{
     width: 145px;
 }
+
+.linked{
+    background-color: rgb(184, 245, 184);
+}
+
+.notLinked{
+    background-color: rgb(250, 150, 150);
+}

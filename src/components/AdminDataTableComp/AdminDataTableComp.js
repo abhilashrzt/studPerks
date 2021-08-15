@@ -16,12 +16,34 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
     const [subject, setSubject] = useState(["All"]);
     const [selectedSubject, setSelectedSubject] = useState(subject[0]);
     const [searchText, setSearchText] = useState("");
-    const [editData, setEditData] = useState({});
+    const [storageData, setStorageData] = useState([]);
+    const [isDeleting, setIsDeleting] = useState(false);
 
     useEffect(()=>{
         getData();
-        console.log("inside firebase call : ",tableData)
     },[selectedDegree])
+
+    useEffect(() => {
+        const fetchFiles = async () => {
+        setIsloading(true);
+        let result = await storage.ref().child(`files/${selectedDegree}`).listAll();
+            let urlPromises = result.items.map(fileRef => fileRef.getMetadata());
+            return Promise.all(urlPromises);
+    
+        }
+        const  loadFiles = async () => {
+            const urls = await fetchFiles();
+            const uniqueIDs = tableData.map((item)=>item.uniqueKey);
+            setStorageData(urls.map(file=>{
+                 const includes = uniqueIDs.includes(file.name);
+                 return includes ? {...file, isLinked: true} : file;
+            }));
+            setIsloading(false);
+            setIsDeleting(false);
+
+        }
+        loadFiles();
+        }, [selectedDB, selectedDegree, isDeleting]);
 
 
     const getData = () => {
@@ -54,16 +76,16 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
         setSearchText(e.target.value);
     }
 
-    const onClickDelete = (fileName) =>{
-        firebaseDb.ref().child(`${selectedDegree}/${fileName}`).remove(err=>{
+    const onClickDelete = (uniqueKey) =>{
+        firebaseDb.ref().child(`${selectedDegree}/${uniqueKey}`).remove(err=>{
             if(err){
                 console.log("Error in FBD : ", err);
             }
         })
     }
 
-    const onClickDownload = ({degree, fileName, downloads }) => {
-        firebaseDb.ref().child(`${degree}/${fileName}/downloads`)
+    const onClickDownload = ({degree, uniqueKey, downloads }) => {
+        firebaseDb.ref().child(`${degree}/${uniqueKey}/downloads`)
         .set(downloads+1, err=>{
             if(err){
                 console.log("fireDb err:", err)
@@ -90,10 +112,6 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                 || item?.fileName?.toLowerCase()?.includes(searchText?.toLowerCase())))
         }
         return result;
-    }
-
-    const onClickUpdate = (item) => {
-        
     }
 
     const tableArrayData = getFilteredData();
@@ -141,7 +159,36 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                 </div>
             </div>
             <div className={styles.tableWrapper}>
-                <table className={styles.table}>
+                { selectedDB === 'Storage' ? <table className={styles.table}>
+                    <thead>
+                        <tr>
+                            <th>Sl no</th>
+                            <th>Name</th>
+                            <th>Linked</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       {storageData.map((item, index)=>{
+                           return (
+                            <tr key={index}>
+                                <td>{index+1}</td>
+                                <td>{item.name}</td>
+                                <td className={item.isLinked ? styles.linked : styles.notLinked}>{item.isLinked ? "Linked" : "Not Linked"}</td>
+                                <td>
+                                    <button 
+                                        className={styles.deleteBtn} 
+                                        onClick={()=>{
+                                            storage.ref().child(item.fullPath).delete();
+                                            setIsDeleting(true);
+                                        }}
+                                    >Delete</button>
+                                </td>
+                            </tr>
+                           )
+                       }) }
+                    </tbody>
+                </table> : <table className={styles.table}>
                     <thead>
                         <tr>
                             <th>Sl no</th>
@@ -156,7 +203,7 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                     <tbody>
                        {tableArrayData.map((item, index)=>{
                            return (
-                            <tr>
+                            <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{item.subjectName}</td>
                                 <td>{item.degree}</td>
@@ -165,7 +212,7 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                                     href={item.url}
                                     onClick={()=>onClickDownload({
                                         degree: item.degree,
-                                        fileName: item.fileName,
+                                        uniqueKey: item.uniqueKey,
                                         downloads: item.downloads,
                                     })} 
                                     target={'_blank'}
@@ -173,13 +220,13 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                                 <td>{item.downloads}</td>
                                 {isAdmin && <td>
                                     <button className={styles.editBtn} onClick={()=>setData(item)}>Edit</button>
-                                    <button className={styles.deleteBtn} onClick={()=>onClickDelete(item.fileName)}>Delete</button>
+                                    <button className={styles.deleteBtn} onClick={()=>onClickDelete(item.uniqueKey)}>Delete</button>
                                     </td>}
                             </tr>
                            )
                        }) }
                     </tbody>
-                </table>
+                </table>}
             </div>
         </div>
     )

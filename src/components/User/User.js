@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { storage, firebaseDb } from '../../firebaseConfig';
 import AdminFileUploadComp from '../AdminFileUploadComp/AdminFileUploadComp';
 import AdminDataTableComp from '../AdminDataTableComp/AdminDataTableComp';
@@ -15,6 +16,8 @@ const User = ({page}) => {
         degree:"BCA",
         url: "",
         subjectName: "",
+        timeStamp: 0,
+        uniqueKey: "",
         downloads: 0,
     })
 
@@ -25,14 +28,19 @@ const User = ({page}) => {
             setProgress(0);
             setFile(e.target.files[0]);
             setFileChanged(true);
-            setData({...data, fileName: fileData.name.replace(/[^a-zA-Z ]/g, "")})
+            setData({
+                ...data, 
+                fileName: fileData.name, 
+                downloads: 0,
+                uniqueKey: uuidv4(),
+            });
         }
     }
 
     const onUploadBtnClick = () =>{
         if(fileChanged){
             setUploading(true);
-            const uploadTask = storage.ref(`files/${data?.degree}/${data?.fileName.replace(/[^a-zA-Z ]/g, "")}/`).put(file);
+            const uploadTask = storage.ref(`files/${data?.degree}/${data.uniqueKey}/`).put(file);
             uploadTask.on(
               "state_changed",
               snapshot => {
@@ -47,12 +55,13 @@ const User = ({page}) => {
               () => {
                 storage
                   .ref("files")
-                  .child(`${data?.degree}/${data?.fileName.replace(/[^a-zA-Z ]/g, "")}/`)
+                  .child(`${data?.degree}/${data.uniqueKey}/`)
                   .getDownloadURL()
                   .then(url => {
                     console.log("Uploaded URL :",url)
                      onSaveClick(url);
                      setUploading(false);
+                     setFileChanged(false);
                   });
               }
             );
@@ -63,8 +72,9 @@ const User = ({page}) => {
     }
 
     const onSaveClick = (url)=>{
-        const locationUrl = `${data?.degree}/${data?.fileName.replace(/[^a-zA-Z ]/g, "")}/`;
-        const dataObject = url ? {...data, url, timeStamp: Date.now()} : data;
+        const timeStamp = data?.timeStamp > 0 ? data?.timeStamp : Date.now();
+        const locationUrl = `${data?.degree}/${data.uniqueKey}/`;
+        const dataObject = url ? {...data, url, timeStamp} : data;
         firebaseDb.ref().child(locationUrl) .set(dataObject, err=>{
             if(err){
                 console.log("fireDb err:", err)
@@ -75,11 +85,13 @@ const User = ({page}) => {
 
 
     const onChangeData = ({key, value}) =>{
-        setData({...data, [key]: value})
+        setData({
+            ...data, 
+            [key]: value, });
     }
 
     const disabled = !(data.subjectName && data.fileName);
-    
+
     return (
         <>
             {uploading && <div className={styles.uploadPopup}>{`Uploading file ${progress}%`}</div>}
