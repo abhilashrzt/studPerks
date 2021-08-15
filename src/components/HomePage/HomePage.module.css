@@ -1,0 +1,35 @@
+.bodyWrapper{
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow: auto;
+}
+
+.bgImg{
+    background-image: url('../../images/library.png');
+    
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 600px;
+    width: 100%;
+}
+
+.textContainer{
+    height: calc(100% - 600px);
+    width: 100%;
+}
+
+.aboutWrapper{
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.secondaryHeaderText{
+    font-size: 20px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.aboutText{
+    text-align: center;
+}

@@ -1,0 +1,85 @@
+.headerText{
+    margin: 30px 0;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 25px;
+}
+
+.tableCompWrapper{
+    width: 100%;
+    position: relative;
+    height: calc(100% - 54px);
+}
+
+.loaderWrapper{
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 30px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f3f2f2;
+    backdrop-filter: blur(10px);
+}
+
+.dropDownWrapper{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.dropDownChildWrapper{
+    margin-right: 20px;
+}
+
+.tableWrapper{
+    width: 100%;
+    height: calc(100% - 124px);
+    overflow: auto;
+}
+
+.table{
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table, th, tr, td{
+    border: 1px solid rgb(92, 91, 91);
+    text-align: center;
+}
+
+th{
+    background-color: rgb(219, 224, 224);
+}
+
+.deleteBtn{
+    height: 20px;
+    padding: 0 10px;
+    font-size: 10px;
+    margin: 3px 0;
+    background-color: #ff6666;
+    border-radius: 5px;
+    border: 0;
+}
+
+.subjectDropDown{
+    width: 288px;
+}
+
+.databaseDropDown{
+    width: 230px;
+}
+
+.degreeDropDown{
+    width: 160px;
+}
+
+.searchBox{
+    width: 200px;
+}
+
+.searchText{
+    width: 145px;
+}

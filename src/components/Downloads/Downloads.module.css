@@ -1,0 +1,13 @@
+.bodyWrapper{
+    width: 100%;
+    height: calc(100% - 60px);
+    overflow: hidden;
+    display: flex;
+}
+
+.rightWrapper{
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    margin: 15px;
+}

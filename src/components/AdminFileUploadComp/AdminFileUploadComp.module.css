@@ -1,0 +1,50 @@
+.headerText{
+    margin: 30px 0;
+    font-family: 'Lobster', cursive;
+}
+
+.headerBtn{
+    cursor: pointer;
+    height: 30px;
+    border: 0;
+    font-size: 14px;
+    border-radius: 3px;
+    padding: 0 10px;
+    color: #ffffff;
+    margin-right: 20px;
+    box-shadow: 0 2px 2px 0 rgb(0 0 0 / 20%);
+}
+
+.uploadBtn{
+    background-color: #ff6666;
+    border-color: #ff6666;
+    width: 90px;
+    margin-top: 20px;
+    margin-left: 27%;
+}
+
+.disabled{
+    opacity: 0.5;
+}
+
+.inputWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.inputElement{
+    margin-left: 10px;
+    width: 150px;
+}
+
+.fileSelectElement{
+    margin-left: 10px;
+    font-size: 15px;
+}
+
+.labelWrapper{
+    width: 105px;
+    text-align: right;
+}
