@@ -63,13 +63,14 @@ const User = ({page}) => {
     }
 
     const onSaveClick = (url)=>{
-        firebaseDb.ref().child(`${data?.degree}/${data?.fileName.replace(/[^a-zA-Z ]/g, "")}/`)
-        .set({...data, url, timeStamp: Date.now()}, err=>{
+        const locationUrl = `${data?.degree}/${data?.fileName.replace(/[^a-zA-Z ]/g, "")}/`;
+        const dataObject = url ? {...data, url, timeStamp: Date.now()} : data;
+        firebaseDb.ref().child(locationUrl) .set(dataObject, err=>{
             if(err){
                 console.log("fireDb err:", err)
                 window.alert(err?.message)
             }
-        })
+        });
     }
 
 
@@ -77,7 +78,8 @@ const User = ({page}) => {
         setData({...data, [key]: value})
     }
 
-    const disabled = !(data.subjectName && data.fileName)
+    const disabled = !(data.subjectName && data.fileName);
+    
     return (
         <>
             {uploading && <div className={styles.uploadPopup}>{`Uploading file ${progress}%`}</div>}
@@ -94,6 +96,7 @@ const User = ({page}) => {
                 <AdminDataTableComp
                     key={page}
                     isAdmin={true}
+                    setData={setData}
                 />
             </div>
         </>

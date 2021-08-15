@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import styles from './AdminDataTableComp.module.css';
 
 
-const AdminDataTableComp = ({ isAdmin }) => {
+const AdminDataTableComp = ({ isAdmin, setData }) => {
     const degrees = ["BCA", "BSc", "BA", "BCom", "BBA"];
     const databaseTypes = ["Realtime Database","Storage"];
     const [isLoading, setIsloading] = useState(false);
@@ -16,6 +16,7 @@ const AdminDataTableComp = ({ isAdmin }) => {
     const [subject, setSubject] = useState(["All"]);
     const [selectedSubject, setSelectedSubject] = useState(subject[0]);
     const [searchText, setSearchText] = useState("");
+    const [editData, setEditData] = useState({});
 
     useEffect(()=>{
         getData();
@@ -89,6 +90,10 @@ const AdminDataTableComp = ({ isAdmin }) => {
                 || item?.fileName?.toLowerCase()?.includes(searchText?.toLowerCase())))
         }
         return result;
+    }
+
+    const onClickUpdate = (item) => {
+        
     }
 
     const tableArrayData = getFilteredData();
@@ -166,7 +171,10 @@ const AdminDataTableComp = ({ isAdmin }) => {
                                     target={'_blank'}
                                 >Link</a></td>
                                 <td>{item.downloads}</td>
-                                {isAdmin && <td><button className={styles.deleteBtn} onClick={()=>onClickDelete(item.fileName)}>Delete</button></td>}
+                                {isAdmin && <td>
+                                    <button className={styles.editBtn} onClick={()=>setData(item)}>Edit</button>
+                                    <button className={styles.deleteBtn} onClick={()=>onClickDelete(item.fileName)}>Delete</button>
+                                    </td>}
                             </tr>
                            )
                        }) }

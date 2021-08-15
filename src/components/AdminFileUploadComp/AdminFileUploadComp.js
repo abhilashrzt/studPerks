@@ -30,7 +30,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                 </div>
                 <div className={styles.inputWrapper}>
                     <DropDown
-                        data={data?.degree || []}
+                        value={data?.degree || []}
                         onChangeData={onChangeData}
                         name={"name"}
                         id={"id"} 
