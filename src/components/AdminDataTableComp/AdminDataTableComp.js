@@ -174,7 +174,8 @@ const AdminDataTableComp = ({ isAdmin, setData }) => {
                             <tr key={index}>
                                 <td>{index+1}</td>
                                 <td>{item.name}</td>
-                                <td className={item.isLinked ? styles.linked : styles.notLinked}>{item.isLinked ? "Linked" : "Not Linked"}</td>
+                                <td className={item.isLinked ? styles.linked : styles.notLinked}>
+                                    {item.isLinked === true ? "Linked" : "Not Linked"}</td>
                                 <td>
                                     <button 
                                         className={styles.deleteBtn} 
