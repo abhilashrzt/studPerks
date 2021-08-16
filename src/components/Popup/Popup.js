@@ -40,7 +40,7 @@ const Popup = ({onChangeData, data, submitFeedback, showStatus, hidePopup}) => {
                             required
                             value={data.link}
                             onChange={(e)=>onChangeData({key: 'link', value: e.target.value})} 
-                            placeholder='Paste your new documen link here'
+                            placeholder='Paste your new document link here'
                         />
                 </div>
                 <div className={styles.inputWrapper}>
