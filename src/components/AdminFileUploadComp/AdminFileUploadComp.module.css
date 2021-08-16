@@ -97,7 +97,6 @@ table, tr, th{
 }
 
 .popupWrapper{
-    position: relative;
     width: 500px;
     height: 400px;
     overflow: hidden;
