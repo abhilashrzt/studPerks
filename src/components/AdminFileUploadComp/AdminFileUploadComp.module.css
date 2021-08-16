@@ -143,10 +143,11 @@ table, tr, th{
 .feedbackLinkInput{
     background: transparent;
     border: 0;
-    max-width: 200px;
+    width: 300px;
 }
 
 .cpybtn{
     height: 20px;
     background-color: #94949385;
+    margin-left: 20px;
 }
