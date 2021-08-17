@@ -55,7 +55,7 @@ const LandingPage = () => {
         <Route path={'/downloads'} component={()=><Downloads/>}/>
         <Route path={'/admin'} component={()=><Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
     </Switch>
-    },[])
+    },[isLoggedIn])
 
     return (
         <div className={styles.wrapper}>
