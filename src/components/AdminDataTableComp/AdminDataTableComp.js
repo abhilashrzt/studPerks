@@ -7,7 +7,7 @@ import styles from './AdminDataTableComp.module.css';
 
 
 const AdminDataTableComp = ({ isAdmin, setData }) => {
-    const degrees = ["BCA", "BSc", "BA", "BCom", "BBA"];
+    const degrees = ["BCA", "BSc", "BA", "BCom", "BBA", "Question Papers", "Others"];
     const databaseTypes = ["Realtime Database","Storage"];
     const [isLoading, setIsloading] = useState(false);
     const [selectedDegree, setSelectedDegree] = useState(degrees[0]);

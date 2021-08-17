@@ -70,7 +70,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                         name={"Degree"}
                         id={"id"} 
                         valueKey={"degree"}
-                        data={["BCA", "BSc", "BA", "BCom", "BBA"]}
+                        data={["BCA", "BSc", "BA", "BCom", "BBA", "Question Papers", "Others"]}
                     />
                 </div>
                 <div className={styles.inputWrapper}>
