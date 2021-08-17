@@ -5,8 +5,8 @@ import styles from './Header.module.css'
 
 const Header = ({showPopup, setShowPopup, setIsLoggedIn, isLoggedIn}) => {
     const logOut = () =>{
-        if(document.cookie.includes('authToken'))
-        document.cookie = "authToken=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+        if(document.cookie.includes('authTokenStudentGuide'))
+        document.cookie = "authTokenStudentGuide=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
         setIsLoggedIn(false);
     }
     return (

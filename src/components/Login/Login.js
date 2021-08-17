@@ -19,7 +19,7 @@ const Login = ({setIsLoggedIn, isLoggedIn}) => {
                 setInvalid(true);
             } else{
                 setInvalid(false);
-                document.cookie = `authToken=${value}`;
+                document.cookie = `authTokenStudentGuide=${value}`;
                 setIsLoggedIn(true);
             } 
         });
