@@ -17,7 +17,7 @@ const Header = ({showPopup, setShowPopup, setIsLoggedIn, isLoggedIn}) => {
                    <Link to={'/admin'}><button 
                    className={classnames(styles.headerBtn, styles.logBtn)}>Admin</button></Link>
                    {isLoggedIn && <button 
-                   className={classnames(styles.headerBtn, styles.logBtn)} onClick={()=>logOut()}>Logout</button>}
+                   className={classnames(styles.headerBtn, styles.logOutBtn)} onClick={()=>logOut()}>Logout</button>}
                    <button className={styles.contactUsBtn} onClick={()=>setShowPopup(!showPopup)}>Contact Us</button>
                 </div>
         </header>

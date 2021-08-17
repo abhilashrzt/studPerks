@@ -18,13 +18,10 @@ const Login = ({setIsLoggedIn, isLoggedIn}) => {
             {
                 setInvalid(true);
             } else{
-            console.log("inside else", credentials, document.cookie);
-
                 setInvalid(false);
                 document.cookie = `authToken=${value}`;
                 setIsLoggedIn(true);
             } 
-            console.log("cookie", credentials, document.cookie);
         });
     }
 

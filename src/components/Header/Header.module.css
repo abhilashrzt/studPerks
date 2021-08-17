@@ -46,6 +46,12 @@
     width: 120px;
 }
 
+.logOutBtn{
+    background-color: #ff6666 ;
+    border-color: #ff6666 ;
+    width: 80px;
+}
+
 .logBtn{
     background-color: #6592e6 ;
     border-color: #6592e6 ;
