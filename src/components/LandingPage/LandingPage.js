@@ -11,7 +11,7 @@ import styles from './LandingPage.module.css';
 const LandingPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showStatus, setShowStatus] = useState(false);
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(document.cookie.includes('authToken'));
 
     const [data, setData] = useState({
         name: "",
