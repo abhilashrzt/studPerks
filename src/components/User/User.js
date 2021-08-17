@@ -75,7 +75,7 @@ const User = ({page}) => {
         const timeStamp = data?.timeStamp > 0 ? data?.timeStamp : Date.now();
         const locationUrl = `${data?.degree}/${data.uniqueKey}/`;
         const dataObject = url ? {...data, url, timeStamp} : data;
-        firebaseDb.ref().child(locationUrl) .set(dataObject, err=>{
+        firebaseDb.ref().child(locationUrl).set(dataObject, err=>{
             if(err){
                 console.log("fireDb err:", err)
                 window.alert(err?.message)

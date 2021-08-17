@@ -128,10 +128,10 @@ table, tr, th{
 }
 
 .feedBackDivWrapper{
-    margin-top: 10px;
-    width: 100%;
+    width: 79%;
     height: 174px;
     overflow: auto;
+    margin-left: 5px;
 }
 
 .feedbackHeader{
@@ -150,4 +150,8 @@ table, tr, th{
     height: 20px;
     background-color: #94949385;
     margin-left: 20px;
+}
+
+.feedbackLabelScrollwrapper{
+    display: flex;
 }

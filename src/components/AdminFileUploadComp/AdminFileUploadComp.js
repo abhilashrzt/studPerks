@@ -38,7 +38,7 @@ const AdminFileUploadComp = ({onChangeData, onSelectFile, onUploadBtnClick, data
                         <input className={styles.feedbackLinkInput} ref={clipboard.target} value={feedBack.link} readOnly />
                         <button className={classNames(styles.editBtn, styles.cpybtn)} onClick={clipboard.copy}>Copy</button>
                         </div>
-                        <div className={styles.feedbackLabelWrapper}><label className={styles.labelWrapper}>Feedback : </label>
+                        <div className={classNames(styles.feedbackLabelWrapper, styles.feedbackLabelScrollwrapper)}><label className={styles.labelWrapper}>Feedback : </label>
                         <div className={styles.feedBackDivWrapper}>{`  ${feedBack.feedback}`}</div>
                         </div>
                     </div>}

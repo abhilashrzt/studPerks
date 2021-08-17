@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import { firebaseDb } from '../../firebaseConfig';
 import Header from '../Header/Header';
@@ -11,6 +11,8 @@ import styles from './LandingPage.module.css';
 const LandingPage = () => {
     const [showPopup, setShowPopup] = useState(false);
     const [showStatus, setShowStatus] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
     const [data, setData] = useState({
         name: "",
         feedback: "",
@@ -52,6 +54,8 @@ const LandingPage = () => {
             <Header
                 setShowPopup={setShowPopup}
                 showPopup={showPopup}
+                isLoggedIn={isLoggedIn} 
+                setIsLoggedIn={setIsLoggedIn}
             />
             {showPopup && <Popup
                 onChangeData={onChangeData}
@@ -63,9 +67,9 @@ const LandingPage = () => {
                 hidePopup={hidePopup}
             />}
             <Switch>
-                <Route path={'/'} exact component={HomePage}/>
-                <Route path={'/downloads'} component={Downloads}/>
-                <Route path={'/admin'} component={Login}/>
+                <Route path={'/'} exact component={()=><HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
+                <Route path={'/downloads'} component={()=><Downloads/>}/>
+                <Route path={'/admin'} component={()=><Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
             </Switch>
         </div>
     )
