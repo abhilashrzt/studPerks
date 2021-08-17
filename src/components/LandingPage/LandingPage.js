@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {Route, Switch, BrowserRouter as Router} from 'react-router-dom';
 import { firebaseDb } from '../../firebaseConfig';
 import Header from '../Header/Header';
@@ -49,6 +49,14 @@ const LandingPage = () => {
         },1000);
     }
 
+    const GetSwitchComp = useMemo(()=>{
+        return <Switch>
+        <Route path={'/'} exact component={()=><HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
+        <Route path={'/downloads'} component={()=><Downloads/>}/>
+        <Route path={'/admin'} component={()=><Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
+    </Switch>
+    },[])
+
     return (
         <div className={styles.wrapper}>
             <Header
@@ -58,19 +66,15 @@ const LandingPage = () => {
                 setIsLoggedIn={setIsLoggedIn}
             />
             {showPopup && <Popup
-                onChangeData={onChangeData}
-                data={data}
-                setShowStatus={setShowStatus}
-                showStatus={showStatus}
-                setShowPopup={setShowPopup}
-                submitFeedback={submitFeedback}
-                hidePopup={hidePopup}
-            />}
-            <Switch>
-                <Route path={'/'} exact component={()=><HomePage isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
-                <Route path={'/downloads'} component={()=><Downloads/>}/>
-                <Route path={'/admin'} component={()=><Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn}/>}/>
-            </Switch>
+            onChangeData={onChangeData}
+            data={data}
+            setShowStatus={setShowStatus}
+            showStatus={showStatus}
+            setShowPopup={setShowPopup}
+            submitFeedback={submitFeedback}
+            hidePopup={hidePopup}
+        />}
+        {GetSwitchComp}
         </div>
     )
 }
